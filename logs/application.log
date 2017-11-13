@@ -1,0 +1,105 @@
+2017-11-13 01:27:36,081 [INFO] from akka.event.slf4j.Slf4jLogger in application-akka.actor.default-dispatcher-3 - Slf4jLogger started
+2017-11-13 01:27:36,839 [INFO] from play.api.http.EnabledFilters in play-dev-mode-akka.actor.default-dispatcher-11 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
+
+    play.filters.csrf.CSRFFilter
+    play.filters.headers.SecurityHeadersFilter
+    play.filters.hosts.AllowedHostsFilter
+
+2017-11-13 01:27:36,923 [INFO] from play.api.Play in play-dev-mode-akka.actor.default-dispatcher-11 - Application started (Dev)
+2017-11-13 01:27:42,259 [ERROR] from application in application-scheduler-1 - 
+
+! @761lak4jg - Internal server error, for (POST) [/pereirazc/message] ->
+ 
+play.api.http.HttpErrorHandlerExceptions$$anon$1: Execution exception[[CompletionException: akka.pattern.AskTimeoutException: Ask timed out on [Actor[akka://application/user/parent#1564142662]] after [100 ms]. Sender[null] sent message of type "actors.ParentActor$GetChild".]]
+	at play.api.http.HttpErrorHandlerExceptions$.throwableToUsefulException(HttpErrorHandler.scala:255)
+	at play.api.http.DefaultHttpErrorHandler.onServerError(HttpErrorHandler.scala:182)
+	at play.core.server.AkkaHttpServer$$anonfun$$nestedInanonfun$executeHandler$1$1.applyOrElse(AkkaHttpServer.scala:251)
+	at play.core.server.AkkaHttpServer$$anonfun$$nestedInanonfun$executeHandler$1$1.applyOrElse(AkkaHttpServer.scala:250)
+	at scala.concurrent.Future.$anonfun$recoverWith$1(Future.scala:412)
+	at scala.concurrent.impl.Promise.$anonfun$transformWith$1(Promise.scala:37)
+	at scala.concurrent.impl.CallbackRunnable.run(Promise.scala:60)
+	at play.api.libs.streams.Execution$trampoline$.executeScheduled(Execution.scala:109)
+	at play.api.libs.streams.Execution$trampoline$.execute(Execution.scala:71)
+	at scala.concurrent.impl.CallbackRunnable.executeWithValue(Promise.scala:68)
+	at scala.concurrent.impl.Promise$DefaultPromise.$anonfun$tryComplete$1(Promise.scala:284)
+	at scala.concurrent.impl.Promise$DefaultPromise.$anonfun$tryComplete$1$adapted(Promise.scala:284)
+	at scala.concurrent.impl.Promise$DefaultPromise.tryComplete(Promise.scala:284)
+	at scala.concurrent.Promise.complete(Promise.scala:49)
+	at scala.concurrent.Promise.complete$(Promise.scala:48)
+	at scala.concurrent.impl.Promise$DefaultPromise.complete(Promise.scala:183)
+	at scala.concurrent.java8.FuturesConvertersImpl$P.accept(FutureConvertersImpl.scala:94)
+	at scala.concurrent.java8.FuturesConvertersImpl$P.accept(FutureConvertersImpl.scala:89)
+	at java.util.concurrent.CompletableFuture.uniWhenComplete(CompletableFuture.java:760)
+	at java.util.concurrent.CompletableFuture$UniWhenComplete.tryFire(CompletableFuture.java:736)
+	at java.util.concurrent.CompletableFuture.postComplete(CompletableFuture.java:474)
+	at java.util.concurrent.CompletableFuture.completeExceptionally(CompletableFuture.java:1977)
+	at scala.concurrent.java8.FuturesConvertersImpl$CF.apply(FutureConvertersImpl.scala:21)
+	at scala.concurrent.java8.FuturesConvertersImpl$CF.apply(FutureConvertersImpl.scala:18)
+	at scala.concurrent.impl.CallbackRunnable.run(Promise.scala:60)
+	at scala.concurrent.BatchingExecutor$Batch.processBatch$1(BatchingExecutor.scala:63)
+	at scala.concurrent.BatchingExecutor$Batch.$anonfun$run$1(BatchingExecutor.scala:78)
+	at scala.runtime.java8.JFunction0$mcV$sp.apply(JFunction0$mcV$sp.java:12)
+	at scala.concurrent.BlockContext$.withBlockContext(BlockContext.scala:81)
+	at scala.concurrent.BatchingExecutor$Batch.run(BatchingExecutor.scala:55)
+	at scala.concurrent.Future$InternalCallbackExecutor$.unbatchedExecute(Future.scala:864)
+	at scala.concurrent.BatchingExecutor.execute(BatchingExecutor.scala:106)
+	at scala.concurrent.BatchingExecutor.execute$(BatchingExecutor.scala:103)
+	at scala.concurrent.Future$InternalCallbackExecutor$.execute(Future.scala:862)
+	at scala.concurrent.impl.CallbackRunnable.executeWithValue(Promise.scala:68)
+	at scala.concurrent.impl.Promise$DefaultPromise.$anonfun$tryComplete$1(Promise.scala:284)
+	at scala.concurrent.impl.Promise$DefaultPromise.$anonfun$tryComplete$1$adapted(Promise.scala:284)
+	at scala.concurrent.impl.Promise$DefaultPromise.tryComplete(Promise.scala:284)
+	at akka.pattern.PromiseActorRef$.$anonfun$apply$1(AskSupport.scala:601)
+	at akka.actor.Scheduler$$anon$4.run(Scheduler.scala:140)
+	at scala.concurrent.Future$InternalCallbackExecutor$.unbatchedExecute(Future.scala:864)
+	at scala.concurrent.BatchingExecutor.execute(BatchingExecutor.scala:109)
+	at scala.concurrent.BatchingExecutor.execute$(BatchingExecutor.scala:103)
+	at scala.concurrent.Future$InternalCallbackExecutor$.execute(Future.scala:862)
+	at akka.actor.LightArrayRevolverScheduler$TaskHolder.executeTask(LightArrayRevolverScheduler.scala:328)
+	at akka.actor.LightArrayRevolverScheduler$$anon$4.executeBucket$1(LightArrayRevolverScheduler.scala:279)
+	at akka.actor.LightArrayRevolverScheduler$$anon$4.nextTick(LightArrayRevolverScheduler.scala:283)
+	at akka.actor.LightArrayRevolverScheduler$$anon$4.run(LightArrayRevolverScheduler.scala:235)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.util.concurrent.CompletionException: akka.pattern.AskTimeoutException: Ask timed out on [Actor[akka://application/user/parent#1564142662]] after [100 ms]. Sender[null] sent message of type "actors.ParentActor$GetChild".
+	at java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:292)
+	at java.util.concurrent.CompletableFuture.completeThrowable(CompletableFuture.java:308)
+	at java.util.concurrent.CompletableFuture.uniApply(CompletableFuture.java:593)
+	at java.util.concurrent.CompletableFuture$UniApply.tryFire(CompletableFuture.java:577)
+	... 29 common frames omitted
+Caused by: akka.pattern.AskTimeoutException: Ask timed out on [Actor[akka://application/user/parent#1564142662]] after [100 ms]. Sender[null] sent message of type "actors.ParentActor$GetChild".
+	... 11 common frames omitted
+2017-11-13 01:29:04,394 [INFO] from akka.event.slf4j.Slf4jLogger in application-akka.actor.default-dispatcher-4 - Slf4jLogger started
+2017-11-13 01:29:04,493 [INFO] from play.api.http.EnabledFilters in play-dev-mode-akka.actor.default-dispatcher-4 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
+
+    play.filters.csrf.CSRFFilter
+    play.filters.headers.SecurityHeadersFilter
+    play.filters.hosts.AllowedHostsFilter
+
+2017-11-13 01:29:04,508 [INFO] from play.api.Play in play-dev-mode-akka.actor.default-dispatcher-4 - Application started (Dev)
+2017-11-13 01:29:04,534 [INFO] from actors.ParentActor in application-akka.actor.default-dispatcher-4 - parent received content for `pereirazc`
+2017-11-13 01:29:04,538 [INFO] from actors.ParentActor in application-akka.actor.default-dispatcher-3 - actor for `pereirazc` does not exist. creating one first...
+2017-11-13 01:29:04,541 [INFO] from actors.ChildActor in application-akka.actor.default-dispatcher-4 - `pereirazc` received ola mundo
+2017-11-13 01:29:46,409 [INFO] from akka.event.slf4j.Slf4jLogger in application-akka.actor.default-dispatcher-5 - Slf4jLogger started
+2017-11-13 01:29:46,494 [INFO] from play.api.http.EnabledFilters in play-dev-mode-akka.actor.default-dispatcher-7 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
+
+    play.filters.csrf.CSRFFilter
+    play.filters.headers.SecurityHeadersFilter
+    play.filters.hosts.AllowedHostsFilter
+
+2017-11-13 01:29:46,504 [INFO] from play.api.Play in play-dev-mode-akka.actor.default-dispatcher-7 - Application started (Dev)
+2017-11-13 01:29:46,518 [INFO] from actors.ParentActor in application-akka.actor.default-dispatcher-5 - parent received content for `pereirazc`
+2017-11-13 01:29:46,521 [INFO] from actors.ParentActor in application-akka.actor.default-dispatcher-5 - actor for `pereirazc` does not exist. creating one first...
+2017-11-13 01:29:46,521 [INFO] from actors.ChildActor in application-akka.actor.default-dispatcher-5 - `pereirazc` received "ola mundo"
+2017-11-13 01:29:49,759 [INFO] from actors.ParentActor in application-akka.actor.default-dispatcher-4 - parent received content for `pereirazc`
+2017-11-13 01:29:49,760 [INFO] from actors.ChildActor in application-akka.actor.default-dispatcher-4 - `pereirazc` received "ola mundo"
+2017-11-13 01:29:50,635 [INFO] from actors.ParentActor in application-akka.actor.default-dispatcher-4 - parent received content for `pereirazc`
+2017-11-13 01:29:50,636 [INFO] from actors.ChildActor in application-akka.actor.default-dispatcher-4 - `pereirazc` received "ola mundo"
+2017-11-13 01:29:51,249 [INFO] from actors.ParentActor in application-akka.actor.default-dispatcher-3 - parent received content for `pereirazc`
+2017-11-13 01:29:51,250 [INFO] from actors.ChildActor in application-akka.actor.default-dispatcher-3 - `pereirazc` received "ola mundo"
+2017-11-13 01:29:51,797 [INFO] from actors.ParentActor in application-akka.actor.default-dispatcher-4 - parent received content for `pereirazc`
+2017-11-13 01:29:51,797 [INFO] from actors.ChildActor in application-akka.actor.default-dispatcher-2 - `pereirazc` received "ola mundo"
+2017-11-13 01:29:52,284 [INFO] from actors.ParentActor in application-akka.actor.default-dispatcher-2 - parent received content for `pereirazc`
+2017-11-13 01:29:52,285 [INFO] from actors.ChildActor in application-akka.actor.default-dispatcher-2 - `pereirazc` received "ola mundo"
+2017-11-13 01:29:57,342 [INFO] from actors.ParentActor in application-akka.actor.default-dispatcher-2 - parent received content for `pereirazc1`
+2017-11-13 01:29:57,342 [INFO] from actors.ParentActor in application-akka.actor.default-dispatcher-2 - actor for `pereirazc1` does not exist. creating one first...
+2017-11-13 01:29:57,342 [INFO] from actors.ChildActor in application-akka.actor.default-dispatcher-2 - `pereirazc1` received "ola mundo"
