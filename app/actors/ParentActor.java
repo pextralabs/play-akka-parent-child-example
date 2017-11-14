@@ -39,6 +39,28 @@ public class ParentActor extends AbstractActor implements InjectedActorSupport {
                         CompletionStage<Object> future = ask(child, msg, 1000);
                         pipe(future, context().dispatcher()).to(sender());
                     }
-                ).build();
+                )
+                .match(Actors.Subscribe.class, (sub) -> {
+                            logger.info("parent received subscription for `{}`", sub.topic);
+                            Option<ActorRef> maybe = context().child(sub.topic);
+                            ActorRef child = maybe.nonEmpty() ?
+                                    maybe.get() :
+                                    injectedChild(() -> {
+                                        logger.info("actor for `{}` does not exist. creating one first...", sub.topic);
+                                        return childFactory.create(sub.topic);
+                                    }, sub.topic);
+                            child.tell(sub, sender());
+                        }
+                )
+                .match(Actors.Unsubscribe.class, (sub) -> {
+                            logger.info("parent received subscription for `{}`", sub.topic);
+                            Option<ActorRef> maybe = context().child(sub.topic);
+                            if (maybe.nonEmpty()) {
+                                ActorRef child = maybe.get();
+                                child.tell(sub, sender());
+                            }
+                        }
+                )
+                .build();
     }
 }

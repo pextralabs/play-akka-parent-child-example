@@ -2,10 +2,18 @@ package controllers;
 
 import actors.Actors;
 import actors.ParentActor;
+import actors.WsSubscriberActor;
 import akka.actor.ActorRef;
+import akka.actor.ActorSystem;
+import akka.stream.Materializer;
+import akka.stream.OverflowStrategy;
+import akka.stream.javadsl.Flow;
+import akka.stream.javadsl.Sink;
+import akka.stream.javadsl.Source;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
+import play.libs.streams.ActorFlow;
 import play.mvc.*;
 
 import static akka.pattern.PatternsCS.ask;
@@ -19,10 +27,14 @@ import java.util.concurrent.CompletionStage;
 public class HomeController extends Controller {
 
     private final ActorRef parentActor;
+    private final ActorSystem actorSystem;
+    private final Materializer mat;
 
     @Inject
-    public HomeController(@Named("parent") ActorRef parentActor) {
+    public HomeController(@Named("parent") ActorRef parentActor, ActorSystem actorSystem, Materializer mat) {
         this.parentActor = parentActor;
+        this.actorSystem = actorSystem;
+        this.mat = mat;
     }
 
     public Result index() {
@@ -38,4 +50,14 @@ public class HomeController extends Controller {
                 (Object message) -> ok(message.toString())
         );
     }
+
+    public WebSocket subscribe(String username) {
+        return WebSocket.Text.accept(
+                request -> ActorFlow.actorRef(
+                            out -> WsSubscriberActor.props(parentActor, out, username),
+                            actorSystem,
+                            mat)
+        );
+    }
+
 }
